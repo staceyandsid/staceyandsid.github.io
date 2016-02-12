@@ -1,0 +1,34 @@
+#background_div {
+	margin-left: auto;
+	margin-right:auto;
+	top:0px;
+	height: 790px;
+	background: url('../images/background_jump_edit.jpg') bottom center no-repeat;		
+}
+#main_div {
+
+}
+  
+#header {
+	text-align: center;
+	padding-top:100px;
+	
+}
+
+.centered{
+	text-align: center;
+}
+
+h1 {
+	font-size:42px;
+}
+
+p {
+	font-size:20px;
+}
+
+
+
+
+
+ 
