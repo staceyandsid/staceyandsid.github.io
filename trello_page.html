@@ -11,6 +11,7 @@
         <div class="form-group">
           <label class="control-label">Choose your board</label>
             <select class="form-control" id="boards"></select>
+			
         </div>
       </form>
       
@@ -39,20 +40,20 @@
       );
     };
     
-    var loadedLabels = function(labels) {
-      $.each(labels, function(index, label) {
-        var label = $("<p><span class='badge' style='background:" + label.color + ";'>" + label.uses + "</span> " + label.name + "</p>");
-        $('#labels').append(label)
+    var loadedCards = function(labels) {
+      $.each(cards, function(index, label) {
+        var card = $("<p> "+ card.name + "</p>");
+        $('#cards').append(label)
       });
     };
     $('#boards').change(function() {
       var boardId = $("option:selected", this).val();
-      $('#labels').empty();
+      $('#cards').empty();
       
       Trello.get(
-        '/boards/' + boardId + '/labels',
-        loadedLabels,
-        function() { console.log("Failed to load labels"); }
+        '/boards/' + boardId + '/cards',
+        loadedCards,
+        function() { console.log("Failed to load cards"); }
       );
     });
     
