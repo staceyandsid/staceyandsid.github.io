@@ -42,7 +42,7 @@
     
     var loadedCards = function(cards) {
       $.each(cards, function(index, card) {
-        var card = $("<p> "+ card.id + "</p>");
+        var card = $("<p>"+ card.name + "</p>");
         $('#cards').append(card)
       });
     };
