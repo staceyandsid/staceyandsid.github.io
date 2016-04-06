@@ -13,6 +13,8 @@
             <select class="form-control" id="boards"></select>
         </div>
       </form>
+      
+      <div id="labels"></div>
     </div> 
   </body>
 
@@ -37,6 +39,23 @@
       );
     };
     
+    var loadedLabels = function(labels) {
+      $.each(labels, function(index, label) {
+        var label = $("<p><span class='badge' style='background:" + label.color + ";'>" + label.uses + "</span> " + label.name + "</p>");
+        $('#labels').append(label)
+      });
+    };
+    $('#boards').change(function() {
+      var boardId = $("option:selected", this).val();
+      $('#labels').empty();
+      
+      Trello.get(
+        '/boards/' + boardId + '/labels',
+        loadedLabels,
+        function() { console.log("Failed to load labels"); }
+      );
+    });
+    
     Trello.authorize({
       type: "popup",
       name: "Trello dashboard",
@@ -50,4 +69,4 @@
   </script>
 </html>
 
-  <script src="https://api.trello.com/1/client.js?key=d4bb0ec414775da3bd90b10f7f18011b"></script>
+  
