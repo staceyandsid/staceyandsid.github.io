@@ -40,7 +40,7 @@
       );
     };
     
-    var loadedCards = function(labels) {
+    var loadedCards = function(cards) {
       $.each(cards, function(index, card) {
         var card = $("<p> "+ card.id + "</p>");
         $('#cards').append(card)
