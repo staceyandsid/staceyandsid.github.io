@@ -1,24 +1,53 @@
-<html>		
-  <head>	
-  <title>A Trello Dashboard</title>		
-  <link rel="stylesheet" media="screen" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">		
-  </head>	
-  <body>	
-  <div class="container">		     
-  <h1>Trello Dashboard</h1>		    
-  <!-- We will be putting our dashboard right here -->		
-  </div> 		
-  </body>		  	
-  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="https://api.trello.com/1/client.js?key=d4bb0ec414775da3bd90b10f7f18011b"></script>
+<html>
+  <head>
+    <title>A Trello Dashboard</title>
+    <link rel="stylesheet" media="screen" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Trello Dashboard</h1>
 
-  <script>		   
-		Trello.authorize({type: "popup",
-						  name: "Trello dashboard",
-						  scope: {read: true, write: false}, 
-						  expiration: "never",
-						  success: function() { console.log("Successful authentication"); },
-						  error: function() { console.log("Failed authentication"); }});		
+      <form class="form-horizontal" id="boards_form">
+        <div class="form-group">
+          <label class="control-label">Choose your board</label>
+            <select class="form-control" id="boards"></select>
+        </div>
+      </form>
+    </div> 
+  </body>
+
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+  <script src="https://api.trello.com/1/client.js?key=d4bb0ec414775da3bd90b10f7f18011b"></script>
+  
+  <script type="text/javascript">
+    var loadedBoards = function(boards) {
+      $.each(boards, function(index, value) {
+        $('#boards')
+          .append($("<option></option>")
+          .attr("value",value.id)
+          .text(value.name)); 
+      });
+    };
+    var loadBoards = function() {
+      //Get the users boards
+      Trello.get(
+        '/members/me/boards/',
+        loadedBoards,
+        function() { console.log("Failed to load boards"); }
+      );
+    };
+    
+    Trello.authorize({
+      type: "popup",
+      name: "Trello dashboard",
+      scope: {
+        read: true,
+        write: false },
+      expiration: "never",
+      success: loadBoards,
+      error: function() { console.log("Failed authentication"); }
+    });
   </script>
 </html>
 
+  <script src="https://api.trello.com/1/client.js?key=d4bb0ec414775da3bd90b10f7f18011b"></script>
