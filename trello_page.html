@@ -41,9 +41,9 @@
     };
     
     var loadedCards = function(labels) {
-      $.each(cards, function(index, label) {
-        var card = $("<p> "+ card.name + "</p>");
-        $('#cards').append(label)
+      $.each(cards, function(index, card) {
+        var card = $("<p> "+ card.id + "</p>");
+        $('#cards').append(card)
       });
     };
     $('#boards').change(function() {
