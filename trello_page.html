@@ -24,23 +24,43 @@
   
   <script type="text/javascript">
 	
-	var loadAllTheBoards = function() {
-		  //Get the users boards
-		  Trello.get(
-			'/members/me/boards/',
-			function() { console.log("Failed to load boards"); }
-		  );
-		};
+	var loadedBoards = function(boards) {
+      $.each(boards, function(index, value) {
+        $('#boards')
+          .append($("<option></option>")
+          .attr("value",value.id)
+          .text(value.name)); 
+      });
+    };
 	
-	console.log("blah")
+	console.log(boards)
 	
-	
-	
-	
-	
-	
-	
-	
+    var loadBoards = function() {
+      //Get the users boards
+      Trello.get(
+        '/members/me/boards/',
+        loadedBoards,
+        function() { console.log("Failed to load boards"); }
+      );
+    };
+    
+    var loadedCards = function(cards) {
+      $.each(cards, function(index, card) {
+        var card = $("<p>"+ card.name + "</p>");
+        $('#cards').append(card)
+      });
+    };
+    $('#boards').change(function() {
+      var boardId = $("option:selected", this).val();
+      $('#cards').empty();
+      
+      Trello.get(
+        '/boards/' + boardId + '/cards',
+        loadedCards,
+        function() { console.log("Failed to load cards"); }
+      );
+    });
+    
     Trello.authorize({
       type: "popup",
       name: "Trello dashboard",
@@ -48,7 +68,7 @@
         read: true,
         write: false },
       expiration: "never",
-      success: loadAllTheBoards,
+      success: loadBoards,
       error: function() { console.log("Failed authentication"); }
     });
   </script>
