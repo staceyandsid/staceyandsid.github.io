@@ -23,13 +23,17 @@
   <script src="https://api.trello.com/1/client.js?key=d4bb0ec414775da3bd90b10f7f18011b"></script>
   
   <script type="text/javascript">
-    var loadedBoards = function(boards) {
+    var IT_Boards = ["3BrMq9rv", "4rhp5hGz", "lOqHp3RW"];
+	var IT_ResourceBoard = "RW6tiFHh";
+	
+	var loadedBoards = function(boards) {
       $.each(boards, function(index, value) {
-        $('#boards')
+        if (value.organization.name == "School A") {
+		$('#boards')
           .append($("<option></option>")
           .attr("value",value.id)
           .text(value.name)); 
-      });
+		}});
     };
     var loadBoards = function() {
       //Get the users boards
