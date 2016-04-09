@@ -23,43 +23,24 @@
   <script src="https://api.trello.com/1/client.js?key=d4bb0ec414775da3bd90b10f7f18011b"></script>
   
   <script type="text/javascript">
-    var IT_Boards = ["3BrMq9rv", "4rhp5hGz", "lOqHp3RW"];
-	var IT_ResourceBoard = "RW6tiFHh";
 	
-	var loadedBoards = function(boards) {
-      $.each(boards, function(index, value) {  
-			$('#boards')
-			  .append($("<option></option>")
-			  .attr("value",value.id)
-			  .text(value.name)); 
-		});
-    };
-    var loadBoards = function() {
-      //Get the users boards
-      Trello.get(
-        '/members/me/boards/',
-        loadedBoards,
-        function() { console.log("Failed to load boards"); }
-      );
-    };
-    
-    var loadedCards = function(cards) {
-      $.each(cards, function(index, card) {
-        var card = $("<p>"+ card.name + "</p>");
-        $('#cards').append(card)
-      });
-    };
-    $('#boards').change(function() {
-      var boardId = $("option:selected", this).val();
-      $('#cards').empty();
-      
-      Trello.get(
-        '/boards/' + boardId + '/cards',
-        loadedCards,
-        function() { console.log("Failed to load cards"); }
-      );
-    });
-    
+	var AllTheBoards = function() {
+		  //Get the users boards
+		  Trello.get(
+			'/members/me/boards/',
+			function() { console.log("Failed to load boards"); }
+		  );
+		};
+	
+	console.log("blah")
+	
+	
+	
+	
+	
+	
+	
+	
     Trello.authorize({
       type: "popup",
       name: "Trello dashboard",
