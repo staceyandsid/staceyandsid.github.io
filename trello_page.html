@@ -27,13 +27,11 @@
 	var IT_ResourceBoard = "RW6tiFHh";
 	
 	var loadedBoards = function(boards) {
-      $.each(boards, function(index, value) {
-        if (value.organization == "School A") {
+      $.each(boards, function(index, value) {  
 			$('#boards')
 			  .append($("<option></option>")
 			  .attr("value",value.id)
 			  .text(value.name)); 
-			}
 		});
     };
     var loadBoards = function() {
