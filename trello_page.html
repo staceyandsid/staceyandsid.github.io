@@ -5,8 +5,12 @@
   </head>
   <body>
     <div class="container">
-      <h1>Trello Dashboard</h1>
-
+        <h1>Trello Dashboard</h1>
+	  
+        <form id="individual_checkbox">
+		  <input type="checkbox" name="invdividual"> Show only individual boards<br>
+		</form>
+	
       <form class="form-horizontal" id="boards_form">
         <div class="form-group">
           <label class="control-label">Choose your board</label>
@@ -32,8 +36,6 @@
           .text(value.name)); 
       });
     };
-	
-	console.log(boards)
 	
     var loadBoards = function() {
       //Get the users boards
